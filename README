@@ -229,3 +229,36 @@ Donations:
 bitcoins donations are welcome - please send to this address:
 1C9LBpuy56veBqw5N33sZMoZW8mwCw3tPh
 
+
+-------------------
+-------------------
+Chinese installation
+-------------------
+------------------
+
+利用proxychains在终端使用socks5代理
+原创 2016年09月12日 16:28:12 8208
+1.proxychains安装
+
+cd /usr/local/src
+git clone https://github.com/rofl0r/proxychains-ng.git
+cd proxychains-ng
+./configure --prefix=/usr --sysconfdir=/etc
+make && make install
+make install-config
+cd .. && rm -rf proxychains-ng
+
+2.编辑proxychains配置
+
+vi /etc/proxychains.conf
+//将socks4  127.0.0.1 9050改为
+socks5  127.0.0.1 1080  //1080改为你自己的端口
+
+3.使用方法
+
+在需要代理的命令前加上 proxychains4 ，如：
+
+// 检查是否成功
+proxychains4 curl ip.cn
+// 代理获取文件
+proxychains4 wget http://xxx.com/xxx.zip
